@@ -1,4 +1,4 @@
-import { CustomAPIError } from "../customError.js";
+import { CustomAPIError } from "./customError";
 
 /**
  * 

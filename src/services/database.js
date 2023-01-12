@@ -1,6 +1,8 @@
+/* eslint-disable no-console */
 import { MongoMemoryServer } from "mongodb-memory-server";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
+
 dotenv.config()
 
 const memoryServer = new MongoMemoryServer();

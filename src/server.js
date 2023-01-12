@@ -2,17 +2,16 @@ import compression from 'compression'
 import express from 'express'
 import cors from "cors";
 import dotenv from "dotenv";
-dotenv.config()
 import paginator from "mongoose-paginate-v2";
 import morgan from 'morgan';
 import helmet from 'helmet';
 import expressSession from "express-session";
 import MongoStore from 'connect-mongo'
-import notFound from './middleware/notFound.js';
-import errorHandlerMiddleware from './middleware/errorHandler.js';
+import notFound from './middleware/notFound';
+import errorHandlerMiddleware from './middleware/errorHandler';
+import homeRoutes from './routes/home'
 
-// Import routes
-import homeRoutes from './routes/home.js'
+dotenv.config()
 
 paginator.paginate.options = { lean: true, leanWithId: false };
 const { NODE_ENV, SESSION_SECRET, SESSION_DATABASE_URL } = process.env;
@@ -61,7 +60,7 @@ app.use(
 
 // Routes
 const apiPath = "/api";
-app.use(apiPath + "/", homeRoutes);
+app.use(`${apiPath}/`, homeRoutes);
 
 // Use middlewares
 app.use(notFound);
@@ -72,6 +71,7 @@ app.use(errorHandlerMiddleware)
  * Process.traceDeprecation = true;
  */
 process.on("uncaughtException", (err) => {
+    // eslint-disable-next-line no-console
     console.log(
       `UNCAUGHT EXCEPTION! Server Shutting down...\n
         ${err.name} \n ${err.message} \n ${err.stack}`

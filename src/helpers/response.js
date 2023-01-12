@@ -10,12 +10,10 @@ const error = (res, code, err, data) => {
     });
 };
 
-const success = (res, code, data) => {
-    return res.status(code).send({
-        success: 1,
-        message: "Successful",
-        data
-    });
-};
+const success = (res, code, data) => res.status(code).send({
+    success: 1,
+    message: "Successful",
+    data
+});
 
 export { error, success };

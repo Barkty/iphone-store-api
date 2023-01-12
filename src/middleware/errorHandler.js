@@ -1,4 +1,4 @@
-import { CustomAPIError } from "../utils/customError.js";
+import { CustomAPIError } from "../utils/customError";
 
 const errorResponse = (res, statusCode, msg) =>
   res.status(statusCode).json({ message: msg, success: 0 });
@@ -6,16 +6,17 @@ const errorResponse = (res, statusCode, msg) =>
 const errorHandlerMiddleware = (err, req, res, next) => {
   if (err instanceof CustomAPIError) {
     return errorResponse(res, err.statusCode, err.message);
-  } else if (err.name === "ValidationError") {
+  } if (err.name === "ValidationError") {
     let msg = "";
     Object.keys(err.errors).forEach((key) => {
-      msg += err.errors[key].message + ".";
+      msg += `${err.errors[key].message}.`;
     });
 
     return errorResponse(res, 400, msg);
-  } else if (err.name === "TokenExpiredError") {
+  } if (err.name === "TokenExpiredError") {
     return errorResponse(res, 401, "Not authorized: token expired");
   }
+  // eslint-disable-next-line no-console
   console.log(err);
   return errorResponse(res, 500, "Something went wrong, please try again");
 };

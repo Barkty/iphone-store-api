@@ -7,7 +7,12 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon src/index.js",
-    "dev": "nodemon src/index.js"
+    "dev": "nodemon --experimental-specifier-resolution=node src/index",
+    "prettier-format": "prettier --config .prettierrc \"**/**/*.js\" --write",
+    "lint": "eslint . --ext .js",
+    "lint-and-fix": "eslint . --ext .js --fix",
+    "prettier-watch": "onchange '**/**/*.js' -- prettier --write {{changed}}",
+    "docs": "jsdoc -c jsdoc.json"
   },
   "author": "",
   "license": "ISC",
@@ -22,7 +27,11 @@
   "devDependencies": {
     "eslint": "^8.31.0",
     "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^8.6.0",
+    "eslint-import-resolver-node": "^0.3.7",
     "eslint-plugin-import": "^2.27.4",
+    "eslint-plugin-prettier": "^4.2.1",
+    "lint-staged": "^13.1.0",
     "nodemon": "^2.0.20",
     "prettier": "^2.8.2",
     "prettier-quick": "^0.0.5"

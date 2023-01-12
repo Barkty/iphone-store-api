@@ -1,17 +1,18 @@
-import { connectDB, connectTestDB } from "./services/database.js"
-import server from "./server.js"
+/* eslint-disable no-console */
+import { connectDB } from "./services/database"
+import server from "./server"
 
 let { PORT } = process.env
 
-const server_start = async () => {
+const serverStart = async () => {
     try {
         // Open MongoDB Connection
 
         const connect = await connectDB()
-        console.log(connect)
+        console.log('Live DB: ', connect)
 
         // const testConnect = await connectTestDB()
-        // console.log(testConnect)
+        // console.log('Test DB: ', testConnect)
 
         if (PORT == '' || PORT == null) {
             PORT = 8069
@@ -27,4 +28,4 @@ const server_start = async () => {
     }
 }
 
-server_start()
+serverStart()
