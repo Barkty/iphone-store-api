@@ -7,12 +7,7 @@ let { PORT } = process.env
 const serverStart = async () => {
     try {
         // Open MongoDB Connection
-
-        const connect = await connectDB()
-        console.log('Live DB: ', connect)
-
-        // const testConnect = await connectTestDB()
-        // console.log('Test DB: ', testConnect)
+        await connectDB()
 
         if (PORT == '' || PORT == null) {
             PORT = 8069

@@ -65,7 +65,7 @@ const apiPath = "/api";
 app.use(`${apiPath}/`, homeRoutes);
 app.use(`${apiPath}/request`, requestRoutes)
 
-global.__basedir = `${__dirname}/src/assets/`
+global.__basedir = `${__dirname}/assets/`
 
 // Use middlewares
 app.use(notFound);
