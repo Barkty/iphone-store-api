@@ -7,9 +7,11 @@ import morgan from 'morgan';
 import helmet from 'helmet';
 import expressSession from "express-session";
 import MongoStore from 'connect-mongo'
+import { __dirname } from './__Globals';
 import notFound from './middleware/notFound';
 import errorHandlerMiddleware from './middleware/errorHandler';
 import homeRoutes from './routes/home'
+import requestRoutes from './routes/IPhone'
 
 dotenv.config()
 
@@ -61,6 +63,9 @@ app.use(
 // Routes
 const apiPath = "/api";
 app.use(`${apiPath}/`, homeRoutes);
+app.use(`${apiPath}/request`, requestRoutes)
+
+global.__basedir = `${__dirname}/src/assets/`
 
 // Use middlewares
 app.use(notFound);

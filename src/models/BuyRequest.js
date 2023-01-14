@@ -1,4 +1,7 @@
 import { model, Schema} from "mongoose";
+import paginator from "mongoose-paginate-v2";
+// eslint-disable-next-line import/no-extraneous-dependencies
+import mongooseAggregatePaginate from "mongoose-aggregate-paginate-v2";
 
 const BuyRequestSchema = new Schema(
     {
@@ -12,4 +15,6 @@ const BuyRequestSchema = new Schema(
     { toJSON: { virtuals: true }, toObject: { virtuals: true }, timestamps: true }
 )
 
+BuyRequestSchema.plugin(paginator);
+BuyRequestSchema.plugin(mongooseAggregatePaginate);
 export default model("BuyRequest", BuyRequestSchema);
