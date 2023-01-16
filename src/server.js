@@ -24,7 +24,8 @@ app.use(express.json({ limit: "50MB" }));
 app.use(express.urlencoded({ extended: false }));
 
 const getOrigin = (origin, callback) => {
-    const allowedOrigin = !origin || ["localhost", "sahcoplc.com.ng"].some((value) => origin.includes(value));
+    const allowedOrigin = !origin || ["localhost", "https://iphone-cave.netlify.app",
+     "https://iphone-store-gilt.vercel.app/"].some((value) => origin.includes(value));
     if (allowedOrigin) {
         callback(null, true);
     } else {
