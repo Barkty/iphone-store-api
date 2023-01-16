@@ -5,7 +5,7 @@ import { error, success } from "../helpers/response";
 import asyncWrapper from "../middleware/async";
 import BuyRequest from "../models/BuyRequest";
 import SellRequest from "../models/SellRequest";
-import { paginate } from "../helpers/paginate";
+import { generateFilter, paginate } from "../helpers/paginate";
 
 class IPhoneController {
 
@@ -101,8 +101,9 @@ class IPhoneController {
 
         try {
             const { query: { request, page, limit } } = req
+            const filter = generateFilter({...req.query})
             const modelName = request === 'buy' ? 'BuyRequest' : 'SellRequest'
-            const options = { page, limit, modelName, sort: { createdAt: -1 } };
+            const options = { page, limit, filter, modelName, sort: { createdAt: -1 } };
 
             const data = await paginate(options);
             return success(res, 200, data);

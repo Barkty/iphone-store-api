@@ -5,7 +5,7 @@ import { uploadFile } from "../middleware/uploads/fileUpload";
 const router = express.Router();
 const phoneController = new IPhoneController()
 
-router.post('/new', uploadFile.single('file'), phoneController.uploadRequests)
+router.post('/', uploadFile.single('file'), phoneController.uploadRequests)
 router.get('/', phoneController.getPhoneRequest)
 
 export default router

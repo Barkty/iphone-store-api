@@ -1,5 +1,33 @@
 import { model } from "mongoose";
 
+export const generateFilter = (data) => {
+
+    const { search } = data
+
+    let filter = { }
+
+    if(search === '') {
+        filter = { ...filter }
+    }
+
+    if(search !== '' && !search?.includes(',')) {
+        filter = { ...filter, condition: search, storage: search }
+    }
+
+    // eslint-disable-next-line no-unsafe-optional-chaining
+    const [name, condition, storage] = search?.split(',')
+
+    if(name && condition) {
+        filter = { ...filter, name, condition }
+    }
+
+    if(storage) {
+        filter = { ...filter, storage }
+    }
+
+    return filter
+}
+
 const simplePagination = async (data) => {
     const { modelName, filter, projection, page, populate, sort } = data;
     let limit = !data.limit || data.limit > 20 ? 20 : data.limit;
